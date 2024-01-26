@@ -1,7 +1,7 @@
 ---
 # https://fluxcd.io/flux/components/helm/api/v2beta2/#helm.toolkit.fluxcd.io/v2beta2.HelmRelease
  
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: c8yedge-operator-helm-repo
@@ -22,7 +22,7 @@ stringData:
   password: "2FsKSfhnSzf6AkF"  
   
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: cumulocity-iot-edge-operator
