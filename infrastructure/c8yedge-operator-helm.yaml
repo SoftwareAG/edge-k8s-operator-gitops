@@ -1,0 +1,54 @@
+---
+# https://fluxcd.io/flux/components/helm/api/v2beta2/#helm.toolkit.fluxcd.io/v2beta2.HelmRelease
+ 
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: c8yedge-operator-helm-repo
+  namespace: c8yedge
+spec:
+  interval: 1m
+  url: https://registry.stage.c8y.io/chartrepo/edge  
+  secretRef:
+    name: c8yedge-operator-helm-repo-user
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: c8yedge-operator-helm-repo-user
+  namespace: c8yedge
+stringData:
+  username: "edge"
+  password: "2FsKSfhnSzf6AkF"  
+  
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: cumulocity-iot-edge-operator
+  namespace: c8yedge
+spec:
+  interval: 1m
+  timeout: 5m
+  chart:
+    spec:
+      chart: cumulocity-iot-edge-operator
+      version: "1019.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: c8yedge-operator-helm-repo
+      interval: 1m
+  releaseName: c8yedge-operator-controller-manager
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    image:
+      repository: registry.stage.c8y.io/edge/cumulocity-iot-edge-operator
+    imageCredentials:
+      registry: registry.stage.c8y.io
+      username: "edge"
+      password: "2FsKSfhnSzf6AkF"
