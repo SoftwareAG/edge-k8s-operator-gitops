@@ -1,10 +1,4 @@
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: c8yedge
-
----
 # https://fluxcd.io/flux/components/helm/api/v2beta2/#helm.toolkit.fluxcd.io/v2beta2.HelmRelease
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
