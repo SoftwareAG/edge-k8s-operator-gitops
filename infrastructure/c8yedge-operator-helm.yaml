@@ -23,7 +23,7 @@ spec:
   chart:
     spec:
       chart: cumulocity-iot-edge-operator
-      version: "1019.0.0"
+      version: "1019.0.0-5649"
       sourceRef:
         kind: HelmRepository
         name: c8yedge-operator-helm-repo
