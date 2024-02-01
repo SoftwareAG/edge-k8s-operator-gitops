@@ -1,6 +1,11 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: c8yedge
+
+---
 # https://fluxcd.io/flux/components/helm/api/v2beta2/#helm.toolkit.fluxcd.io/v2beta2.HelmRelease
- 
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
@@ -11,16 +16,7 @@ spec:
   url: https://registry.stage.c8y.io/chartrepo/edge  
   secretRef:
     name: c8yedge-operator-helm-repo-user
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: c8yedge-operator-helm-repo-user
-  namespace: c8yedge
-stringData:
-  username: "edge"
-  password: "2FsKSfhnSzf6AkF"  
-  
+
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -52,3 +48,13 @@ spec:
       registry: registry.stage.c8y.io
       username: "edge"
       password: "2FsKSfhnSzf6AkF"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: c8yedge-operator-helm-repo-user
+  namespace: c8yedge
+stringData:
+  username: "edge"
+  password: "2FsKSfhnSzf6AkF"  
